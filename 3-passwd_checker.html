@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passwd Checker</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('https://images.wallpapersden.com/image/download/anonymous-hacker-working_bGllZ2mUmZqaraWkpJRobWllrWdpZWU.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .container {
+        max-width: 400px;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .strength-feedback {
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .weak {
+        color: red;
+    }
+
+    .moderate {
+        color: orange;
+    }
+
+    .strong {
+        color: green;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: black ;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Sign In</h2>
+    <form id="login-form" action="#" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" oninput="checkPasswordStrength()" required>
+        <div id="password-strength" class="strength-feedback"></div>
+
+        <input type="submit" value="Login">
+    </form>
+</div>
+
+<script>
+    function checkPasswordStrength() {
+        var password = document.getElementById("password").value;
+        var strengthElement = document.getElementById("password-strength");
+
+        var lengthRegex = /.{8,}/;
+        var uppercaseRegex = /[A-Z]/;
+        var lowercaseRegex = /[a-z]/;
+        var numberRegex = /[0-9]/;
+        var specialCharRegex = /[@_!#$%^&*()<>?/\|}{~:]/;
+
+        var strength = 0;
+
+        if (lengthRegex.test(password)) {
+            strength++;
+        }
+        if (uppercaseRegex.test(password)) {
+            strength++;
+        }
+        if (lowercaseRegex.test(password)) {
+            strength++;
+        }
+        if (numberRegex.test(password)) {
+            strength++;
+        }
+        if (specialCharRegex.test(password)) {
+            strength++;
+        }
+
+        if (strength >= 4) {
+            strengthElement.innerText = "Password Strength: Strong";
+            strengthElement.className = "strength-feedback strong";
+        } else if (strength >= 2) {
+            strengthElement.innerText = "Password Strength: Moderate";
+            strengthElement.className = "strength-feedback moderate";
+        } else {
+            strengthElement.innerText = "Password Strength: Weak";
+            strengthElement.className = "strength-feedback weak";
+        }
+    }
+</script>
+</body>
+</html>
