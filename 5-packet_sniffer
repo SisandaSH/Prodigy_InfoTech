@@ -1,0 +1,13 @@
+from scapy.all import *
+
+# Function to display packet information
+def packet_handler(packet):
+    if packet.haslayer(TCP):
+        print("Source IP: {}".format(packet[IP].src))
+        print("Destination IP: {}".format(packet[IP].dst))
+        print("Protocol: TCP")
+        print("Payload: {}".format(packet[TCP].payload))
+        print("--------------------------------------------------")
+
+# Start capturing packets
+sniff(filter="tcp", prn=packet_handler, store=0)
